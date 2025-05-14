@@ -68,7 +68,12 @@ class RhymeListCard extends StatelessWidget {
         color: theme.cardColor,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Text('Рифма', style: theme.textTheme.bodyLarge),
+      child: Row(
+        children: [
+          Text('Рифма', style: theme.textTheme.bodyLarge),
+          IconButton(onPressed: () {}, icon: Icon(Icons.heart_broken)),
+        ],
+      ),
     );
   }
 }
