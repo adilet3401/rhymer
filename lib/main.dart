@@ -47,10 +47,28 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           SliverToBoxAdapter(child: SizedBox(height: 16)),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 100,
+              child: ListView.builder(
+                itemCount: 10,
+                itemBuilder: (context, index) => SizedBox(),
+              ),
+            ),
+          ),
           SliverList.builder(itemBuilder: (context, index) => RhymeListCard()),
         ],
       ),
     );
+  }
+}
+
+class BaseContainer extends StatelessWidget {
+  const BaseContainer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold();
   }
 }
 
@@ -63,15 +81,20 @@ class RhymeListCard extends StatelessWidget {
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 10),
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: EdgeInsets.only(left: 12),
       decoration: BoxDecoration(
         color: theme.cardColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text('Рифма', style: theme.textTheme.bodyLarge),
-          IconButton(onPressed: () {}, icon: Icon(Icons.heart_broken)),
+          IconButton(
+            onPressed: () {},
+            // ignore: deprecated_member_use
+            icon: Icon(Icons.favorite, color: theme.hintColor.withOpacity(0.2)),
+          ),
         ],
       ),
     );
