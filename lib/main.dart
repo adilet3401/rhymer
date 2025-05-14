@@ -29,11 +29,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
+          const SliverAppBar(
             pinned: true,
             snap: true,
             floating: true,
@@ -50,12 +49,19 @@ class HomeScreen extends StatelessWidget {
           SliverToBoxAdapter(
             child: SizedBox(
               height: 100,
-              child: ListView.builder(
+              child: ListView.separated(
+                padding: EdgeInsets.only(left: 16),
+                scrollDirection: Axis.horizontal,
                 itemCount: 10,
-                itemBuilder: (context, index) => SizedBox(),
+                separatorBuilder: (context, index) => SizedBox(width: 16),
+                itemBuilder: (context, index) {
+                  final rhymes = List.generate(4, (index) => 'Рифма $index');
+                  return RhymeHistoryCard(rhymes: rhymes);
+                },
               ),
             ),
           ),
+          SliverToBoxAdapter(child: SizedBox(height: 16)),
           SliverList.builder(itemBuilder: (context, index) => RhymeListCard()),
         ],
       ),
@@ -63,12 +69,71 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class BaseContainer extends StatelessWidget {
-  const BaseContainer({super.key});
+class RhymeHistoryCard extends StatelessWidget {
+  const RhymeHistoryCard({super.key, required this.rhymes});
+
+  final List<String> rhymes;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    final theme = Theme.of(context);
+    return BaseContainer(
+      width: 200,
+      padding: EdgeInsets.all(16),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Слово',
+            style: theme.textTheme.bodyLarge?.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          Wrap(
+            children:
+                rhymes
+                    .map(
+                      (e) => Padding(
+                        padding: EdgeInsets.only(right: 4),
+                        child: Text(e),
+                      ),
+                    )
+                    .toList(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class BaseContainer extends StatelessWidget {
+  const BaseContainer({
+    super.key,
+    required this.child,
+    required this.width,
+    this.margin,
+    this.padding = const EdgeInsets.only(left: 12),
+  });
+
+  final double width;
+  final EdgeInsets? margin;
+  final Widget child;
+  final EdgeInsets padding;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+      width: width,
+      margin: margin,
+      padding: padding,
+      decoration: BoxDecoration(
+        color: theme.cardColor,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: child,
+    );
   }
 }
 
@@ -78,14 +143,9 @@ class RhymeListCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
+    return BaseContainer(
       width: double.infinity,
-      margin: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 10),
-      padding: EdgeInsets.only(left: 12),
-      decoration: BoxDecoration(
-        color: theme.cardColor,
-        borderRadius: BorderRadius.circular(10),
-      ),
+      margin: EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
