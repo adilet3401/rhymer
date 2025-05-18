@@ -1,12 +1,12 @@
-@AutoRouterConfig()
-class AppRouter extends RootStackRouter {
+// @AutoRouterConfig()
+// class AppRouter extends RootStackRouter {
 
- @override
- List<AutoRoute> get routes => [
-   /// routes go here
- ];
-}
+//  @override
+//  List<AutoRoute> get routes => [
+//    /// routes go here
+//  ];
+// }
 
-class AutoRouterConfig {
-  const AutoRouterConfig();
-}
+// class AutoRouterConfig {
+//   const AutoRouterConfig();
+// }
