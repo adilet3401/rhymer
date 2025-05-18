@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../favorites/view/favorites_screen.dart';
@@ -5,6 +6,7 @@ import '../../poems/view/poems_screen.dart';
 import '../../search/view/search_screen.dart';
 import '../../settings/view/settings_screen.dart';
 
+@RoutePage()
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
