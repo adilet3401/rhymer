@@ -1,6 +1,7 @@
-
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage()
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
 
@@ -9,4 +10,3 @@ class SettingScreen extends StatelessWidget {
     return Scaffold();
   }
 }
-
