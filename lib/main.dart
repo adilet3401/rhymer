@@ -22,7 +22,7 @@ class _RhymerAppState extends State<RhymerApp> {
     return MaterialApp.router(
       //autoroute
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Rhymer',
       theme: ThemeData(
         primaryColor: primaryColor,
         scaffoldBackgroundColor: Color(0xffeff1f3),
